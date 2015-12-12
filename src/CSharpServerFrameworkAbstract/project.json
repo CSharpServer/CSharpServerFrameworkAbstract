@@ -1,0 +1,12 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "CSharpServerFrameworkAbstract Class Library",
+  "authors": [ "Cplover" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "frameworks": {
+    "dnx451": { }
+  }
+}
