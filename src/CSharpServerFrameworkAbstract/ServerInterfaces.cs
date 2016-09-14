@@ -14,17 +14,11 @@ namespace CSharpServerFramework
     /// <summary>
     /// 服务器的异常
     /// </summary>
-    [Serializable]
     public class CSServerException : Exception
     {
         public CSServerException() { }
         public CSServerException(string message) : base(message) { }
         public CSServerException(string message, Exception inner) : base(message, inner) { }
-        protected CSServerException(
-          System.Runtime.Serialization.SerializationInfo info,
-          System.Runtime.Serialization.StreamingContext context)
-            : base(info, context)
-        { }
     }
 
     public interface ICSServerBuilder: IUseExtension, ILoggerBuilder, IUseMessageRouter

@@ -1,9 +1,10 @@
-﻿using CSharpServerFramework.Extension;
+﻿using System;
+using CSharpServerFramework.Extension;
 using CSharpServerFramework.Message;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace CSharpServerFramework
 {
@@ -44,15 +45,14 @@ namespace CSharpServerFramework
 
         private string GetExtensionName()
         {
-            var extensionAttr = Attribute.GetCustomAttribute(this.GetType(), typeof(ExtensionInfoAttribute));
+            var extensionAttr = this.GetType().GetTypeInfo().GetCustomAttribute<ExtensionInfoAttribute>();
             if (extensionAttr == null)
             {
                 throw new ExtensionNameException("Extension Is No Name Attribute:" + this.GetType().ToString());
             }
             else
             {
-                var classAttribute = (ExtensionInfoAttribute)extensionAttr;
-                ExtensionName = classAttribute.Name;
+                ExtensionName = extensionAttr.Name;
             }
             return ExtensionName;
         }
@@ -64,7 +64,8 @@ namespace CSharpServerFramework
             List<ExtensionCommand> commands = new List<ExtensionCommand>();
             foreach (var method in methods)
             {
-                CommandInfoAttribute attr = Attribute.GetCustomAttribute(method, typeof(CommandInfoAttribute)) as CommandInfoAttribute;
+                
+                var attr = method.GetCustomAttribute<CommandInfoAttribute>();
                 if (attr != null)
                 {
                     string commandName = attr.CommandName;
@@ -132,29 +133,17 @@ namespace CSharpServerFramework
         void CloseSession(ICSharpServerSession Session);
     }
 
-    [Serializable]
     public class ExtensionException : Exception
     {
         public ExtensionException() { }
         public ExtensionException(string message) : base(message) { }
         public ExtensionException(string message, Exception inner) : base(message, inner) { }
-        protected ExtensionException(
-          System.Runtime.Serialization.SerializationInfo info,
-          System.Runtime.Serialization.StreamingContext context)
-            : base(info, context)
-        { }
     }
 
-    [Serializable]
     public class ExtensionNameException : Exception
     {
         public ExtensionNameException() { }
         public ExtensionNameException(string message) : base(message) { }
         public ExtensionNameException(string message, Exception inner) : base(message, inner) { }
-        protected ExtensionNameException(
-          System.Runtime.Serialization.SerializationInfo info,
-          System.Runtime.Serialization.StreamingContext context)
-            : base(info, context)
-        { }
     }
 }
