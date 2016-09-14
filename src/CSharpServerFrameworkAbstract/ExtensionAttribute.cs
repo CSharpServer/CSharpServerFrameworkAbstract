@@ -48,18 +48,18 @@ namespace CSharpServerFramework.Extension
         /// isAcceptRawData为true，方法定义为 void fun(ICSharpServerSession session, byte[] buffer)，buffer 为Client发送的完整数据包（包括包头，route信息）
         /// isAcceptRawData为false，方法定义为 void fun(ICSharpServerSession session, dynamic msg)
         /// </summary>
-        /// <param name="CommandId">分配的Id，同一个Extension里CommandId必须不同</param>
-        /// <param name="Name">命令名，要求同上</param>
-        /// <param name="AsyncInvoke">指定Command是否使用异步方式调用，默认使用同方式调用。如果Extension子类的方法存在死循环或方法阻塞时间长，请设置改值为真，改为异步调用</param>
-        /// <param name="OrderCommand">有顺序的命令，先请求的先响应,AsyncInvoke参数必须是false有效</param>
+        /// <param name="commandId">分配的Id，同一个Extension里CommandId必须不同</param>
+        /// <param name="name">命令名，要求同上</param>
+        /// <param name="asyncInvoke">指定Command是否使用异步方式调用，默认使用同方式调用。如果Extension子类的方法存在死循环或方法阻塞时间长，请设置改值为真，改为异步调用</param>
+        /// <param name="orderCommand">有顺序的命令，先请求的先响应,AsyncInvoke参数必须是false有效</param>
         /// <param name="isAcceptRawData">方法是否接受byte[]类型的参数</param>
-        public CommandInfoAttribute(int CommandId, string Name = null, bool AsyncInvoke = true, bool OrderCommand = false,bool IsAcceptRawData = false)
+        public CommandInfoAttribute(int commandId, string name = null, bool asyncInvoke = true, bool orderCommand = false,bool isAcceptRawData = false)
         {
-            this.Id = CommandId;
-            this.name = Name;
-            this.isAsyncInvoke = AsyncInvoke;
-            this.isOrderCommand = OrderCommand;
-            this.isAcceptRawData = IsAcceptRawData;
+            this.Id = commandId;
+            this.name = name;
+            this.isAsyncInvoke = asyncInvoke;
+            this.isOrderCommand = orderCommand;
+            this.isAcceptRawData = isAcceptRawData;
         }
 
         /// <summary>
@@ -67,12 +67,12 @@ namespace CSharpServerFramework.Extension
         /// isAcceptRawData为true，方法定义为 void fun(ICSharpServerSession session, byte[] buffer)，buffer 为Client发送的完整数据包（包括包头，route信息）
         /// isAcceptRawData为false，方法定义为 void fun(ICSharpServerSession session, dynamic msg)
         /// </summary>
-        /// <param name="CommandId">分配的Id，同一个Extension里CommandId必须不同</param>
-        /// <param name="AsyncInvoke">指定Command是否使用异步方式调用，默认使用同方式调用。如果Extension子类的方法存在死循环或方法阻塞时间长，请设置改值为真，改为异步调用</param>
-        /// <param name="OrderCommand">有顺序的命令，先请求的先响应,AsyncInvoke参数必须是false有效</param>
+        /// <param name="commandId">分配的Id，同一个Extension里CommandId必须不同</param>
+        /// <param name="asyncInvoke">指定Command是否使用异步方式调用，默认使用同方式调用。如果Extension子类的方法存在死循环或方法阻塞时间长，请设置改值为真，改为异步调用</param>
+        /// <param name="orderCommand">有顺序的命令，先请求的先响应,AsyncInvoke参数必须是false有效</param>
         /// <param name="isAcceptRawData">方法是否接受byte[]类型的参数</param>
-        public CommandInfoAttribute(int CommandId, bool AsyncInvoke = true, bool OrderCommand = false, bool IsAcceptRawData = false) :
-            this(CommandId,null,AsyncInvoke,OrderCommand, IsAcceptRawData)
+        public CommandInfoAttribute(int commandId, bool asyncInvoke = true, bool orderCommand = false, bool isAcceptRawData = false) :
+            this(commandId,null,asyncInvoke,orderCommand, isAcceptRawData)
         {
         }
 
@@ -81,12 +81,12 @@ namespace CSharpServerFramework.Extension
         /// isAcceptRawData为true，方法定义为 void fun(ICSharpServerSession session, byte[] buffer)，buffer 为Client发送的完整数据包（包括包头，route信息）
         /// isAcceptRawData为false，方法定义为 void fun(ICSharpServerSession session, dynamic msg)
         /// </summary>
-        /// <param name="Name">命令名，同一个Extension里CommandId必须不同</param>
-        /// <param name="AsyncInvoke">指定Command是否使用异步方式调用，默认使用同方式调用。如果Extension子类的方法存在死循环或方法阻塞时间长，请设置改值为真，改为异步调用</param>
-        /// <param name="OrderCommand">有顺序的命令，先请求的先响应,AsyncInvoke参数必须是false有效</param>
+        /// <param name="name">命令名，同一个Extension里CommandId必须不同</param>
+        /// <param name="asyncInvoke">指定Command是否使用异步方式调用，默认使用同方式调用。如果Extension子类的方法存在死循环或方法阻塞时间长，请设置改值为真，改为异步调用</param>
+        /// <param name="orderCommand">有顺序的命令，先请求的先响应,AsyncInvoke参数必须是false有效</param>
         /// <param name="isAcceptRawData">方法是否接受byte[]类型的参数</param>
-        public CommandInfoAttribute(string Name, bool AsyncInvoke = true, bool OrderCommand = false, bool IsAcceptRawData = false):
-            this(-1,Name,AsyncInvoke,OrderCommand,IsAcceptRawData)
+        public CommandInfoAttribute(string name, bool asyncInvoke = true, bool orderCommand = false, bool isAcceptRawData = false):
+            this(-1,name,asyncInvoke,orderCommand,isAcceptRawData)
         {
         }
 

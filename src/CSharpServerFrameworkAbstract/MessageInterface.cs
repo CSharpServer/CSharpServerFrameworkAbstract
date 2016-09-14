@@ -49,11 +49,11 @@ namespace CSharpServerFramework.Message
         /// <summary>
         /// 根据CommandId处理客户端发送的数据，返回数据实体，数据实体最终会传递给具体的Extension的对应CommandId的方法
         /// </summary>
-        /// <param name="CommandId">处理消息的函数Id</param>
-        /// <param name="ReceivedData">数据流</param>
-        /// <param name="Length">数据流长度</param>
+        /// <param name="commandId">处理消息的函数Id</param>
+        /// <param name="receivedData">数据流</param>
+        /// <param name="length">数据流长度</param>
         /// <returns></returns>
-        object DeserializeMessage(int CommandId, byte[] ReceivedData, int Length);
+        object DeserializeMessage(int commandId, byte[] receivedData, int length);
     }
 
     /// <summary>
@@ -61,12 +61,12 @@ namespace CSharpServerFramework.Message
     /// </summary>
     public interface IUseMessageRouter
     {
-        void UseMessageRoute(IGetMessageRoute Router);
+        void UseMessageRoute(IGetMessageRoute router);
     }
 
     public interface IGetMessageRoute
     {
-        MessageRoute Filter(byte[] ReceivedData, int Length);
+        MessageRoute Filter(byte[] receivedData, int length);
     }
     /// <summary>
     /// 服务端接收到的消息的路由信息

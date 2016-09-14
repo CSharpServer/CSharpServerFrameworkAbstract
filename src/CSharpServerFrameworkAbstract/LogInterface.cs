@@ -7,12 +7,12 @@ namespace CSharpServerFramework.Log
 {
     public interface ILoggerLog
     {
-        void Log(string LogString);
+        void Log(string logString);
         void Close();
     }
 
     public interface ILoggerBuilder
     {
-        void UseLogger(ILoggerLog Logger);
+        void UseLogger(ILoggerLog logger);
     }
 }

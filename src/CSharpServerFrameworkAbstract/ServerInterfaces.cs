@@ -23,8 +23,8 @@ namespace CSharpServerFramework
 
     public interface ICSServerBuilder: IUseExtension, ILoggerBuilder, IUseMessageRouter
     {
-        void UseServerConfig(IGetServerConfig ServerConfig);
-        void UseNetConfig(IGetNetConfig NetConfig);
+        void UseServerConfig(IGetServerConfig serverConfig);
+        void UseNetConfig(IGetNetConfig netConfig);
     }
 
     public interface IGetServerConfig

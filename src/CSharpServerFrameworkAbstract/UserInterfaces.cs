@@ -38,8 +38,8 @@ namespace CSharpServerFramework
         /// 注册当前会话的用户实体
         /// 一般在验证拓展里调用
         /// </summary>
-        /// <param name="User"></param>
+        /// <param name="user"></param>
         /// <returns></returns>
-        bool RegistUser(ICSharpServerUser User);
+        bool RegistUser(ICSharpServerUser user);
     }
 }

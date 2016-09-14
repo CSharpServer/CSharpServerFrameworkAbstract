@@ -27,9 +27,9 @@ namespace CSharpServerFramework
     {
         public object ServerExtensionBase;
 
-        public ExtensionBaseEx(IDeserializeMessage Deserializer)
+        public ExtensionBaseEx(IDeserializeMessage deserializer)
         {
-            MessageDecompressor = Deserializer;
+            MessageDecompressor = deserializer;
             ExtensionName = GetExtensionName();
         }
 
@@ -81,24 +81,24 @@ namespace CSharpServerFramework
             return commands;
         }
 
-        public void SendResponse(ICSharpServerSession Session, SendMessage Message)
+        public void SendResponse(ICSharpServerSession session, SendMessage message)
         {
-            ((ICSharpServerExtension)ServerExtensionBase).SendResponse(Session, Message);
+            ((ICSharpServerExtension)ServerExtensionBase).SendResponse(session, message);
         }
 
-        public void SendResponseToUsers(IEnumerable<ICSharpServerUser> Users, SendMessage Message)
+        public void SendResponseToUsers(IEnumerable<ICSharpServerUser> users, SendMessage message)
         {
-            ((ICSharpServerExtension)ServerExtensionBase).SendResponseToUsers(Users, Message);
+            ((ICSharpServerExtension)ServerExtensionBase).SendResponseToUsers(users, message);
         }
 
-        public bool RedirectMessage(string ExtensionName, int CommandId, ICSharpServerSession Session, dynamic msg)
+        public bool RedirectMessage(string extensionName, int commandId, ICSharpServerSession session, dynamic msg)
         {
-            return ((IExtensionMessageRedirect)ServerExtensionBase).RedirectMessage(ExtensionName, CommandId, Session, msg);
+            return ((IExtensionMessageRedirect)ServerExtensionBase).RedirectMessage(extensionName, commandId, session, msg);
         }
 
-        public bool RedirectMessage(string ExtensionName, string CommandName, ICSharpServerSession Session, dynamic msg)
+        public bool RedirectMessage(string extensionName, string commandName, ICSharpServerSession session, dynamic msg)
         {
-            return ((IExtensionMessageRedirect)ServerExtensionBase).RedirectMessage(ExtensionName, CommandName, Session, msg);
+            return ((IExtensionMessageRedirect)ServerExtensionBase).RedirectMessage(extensionName, commandName, session, msg);
         }
 
         public abstract void Init();
@@ -108,9 +108,9 @@ namespace CSharpServerFramework
             ((IExtensionLog)ServerExtensionBase).Log(msg);
         }
 
-        public void CloseSession(ICSharpServerSession Session)
+        public void CloseSession(ICSharpServerSession session)
         {
-            ((IExtensionSessionManage)ServerExtensionBase).CloseSession(Session);
+            ((IExtensionSessionManage)ServerExtensionBase).CloseSession(session);
         }
     }
 
@@ -118,19 +118,19 @@ namespace CSharpServerFramework
     {
         string ExtensionName { get; }
         IDeserializeMessage MessageDecompressor { get; }
-        void SendResponse(ICSharpServerSession Session, SendMessage Message);
-        void SendResponseToUsers(IEnumerable<ICSharpServerUser> Users, SendMessage Message);
+        void SendResponse(ICSharpServerSession session, SendMessage message);
+        void SendResponseToUsers(IEnumerable<ICSharpServerUser> users, SendMessage message);
     }
 
     public interface IExtensionMessageRedirect
     {
-        bool RedirectMessage(string ExtensionName, int CommandId, ICSharpServerSession Session, dynamic msg);
-        bool RedirectMessage(string ExtensionName, string CommandName, ICSharpServerSession Session, dynamic msg);
+        bool RedirectMessage(string extensionName, int commandId, ICSharpServerSession session, dynamic msg);
+        bool RedirectMessage(string extensionName, string commandName, ICSharpServerSession session, dynamic msg);
     }
 
     public interface IExtensionSessionManage
     {
-        void CloseSession(ICSharpServerSession Session);
+        void CloseSession(ICSharpServerSession session);
     }
 
     public class ExtensionException : Exception
